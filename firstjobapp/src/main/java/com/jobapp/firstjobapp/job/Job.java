@@ -1,9 +1,7 @@
 package com.jobapp.firstjobapp.job;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.jobapp.firstjobapp.company.Company;
+import jakarta.persistence.*;
 
 @Entity
 public class Job {
@@ -16,6 +14,18 @@ public class Job {
     private String minSalary;
     private String maxSalary;
     private String location;
+
+    //comp to job rel :
+    @ManyToOne      //many jobs are linked to one company
+    private Company company;
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
 
     public Job () {}        //we need to create a default constructor for JPA
 

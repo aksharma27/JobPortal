@@ -1,5 +1,7 @@
 package com.jobapp.firstjobapp.company;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.jobapp.firstjobapp.Review.Review;
 import com.jobapp.firstjobapp.job.Job;
 import jakarta.persistence.*;
 
@@ -15,12 +17,22 @@ public class Company {
     private String description;
 
     //every company has a list of job : 1 -> many
-    @OneToMany
+    @JsonIgnore     //comp is mapped to job, job is mapped to comp, and so on, to remove this recursive call, use this ANNOTATION
+    @OneToMany(mappedBy = "company")        //company obj in Job -> foreign key will be added in job(compId taken as a foreing key frm comp table)
     private List<Job> jobs;
 
-    // private List<Review> reviews;
+    @OneToMany(mappedBy = "company")
+     private List<Review> reviews;
 
     public Company() {
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 
     public Long getId() {
