@@ -1,5 +1,7 @@
 package com.jobapp.firstjobapp.company.impl;
 
+import com.jobapp.firstjobapp.Review.Review;
+import com.jobapp.firstjobapp.Review.ReviewRepository;
 import com.jobapp.firstjobapp.company.Company;
 import com.jobapp.firstjobapp.company.CompanyRepository;
 import com.jobapp.firstjobapp.company.CompanyService;
@@ -11,7 +13,9 @@ import java.util.Optional;
 
 @Service
 public class CompanyServiceImp implements CompanyService {
-    private CompanyRepository companyRepository;
+    private ReviewRepository reviewRepository;
+    private final CompanyRepository companyRepository;
+
 
     public CompanyServiceImp (CompanyRepository companyRepository) {
         this.companyRepository = companyRepository;
@@ -53,4 +57,15 @@ public class CompanyServiceImp implements CompanyService {
     public Company getCompanyById(Long id) {
         return companyRepository.findById(id).orElse(null);
     }
+
+//    @Override
+//    public void addReview(Long companyId, Review review) {
+//        Company company = companyService.getCompanyById(companyId);
+//        if (company != null) {
+//            review.setCompany(company);
+//            reviewRepository.save(review);
+//        }
+//    }
+
+
 }
